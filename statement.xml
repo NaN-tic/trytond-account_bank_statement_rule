@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tryton>
+    <data>
+        <!-- statement line rule -->
+        <record model="ir.ui.view" id="account_statement_line_rule_view_tree">
+            <field name="model">account.bank.statement.line.rule</field>
+            <field name="type">tree</field>
+            <field name="name">account_bank_statement_line_rule_tree</field>
+        </record>
+        <record model="ir.ui.view" id="account_statement_line_rule_view_form">
+            <field name="model">account.bank.statement.line.rule</field>
+            <field name="type">form</field>
+            <field name="name">account_bank_statement_line_rule_form</field>
+        </record>
+        <record model="ir.action.act_window" id="act_account_statement_line_rule_form">
+            <field name="name">Account Statement Line Rule</field>
+            <field name="res_model">account.bank.statement.line.rule</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_account_statement_line_rule_form_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="account_statement_line_rule_view_tree"/>
+            <field name="act_window" ref="act_account_statement_line_rule_form"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_account_statement_line_rule_form_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="account_statement_line_rule_view_form"/>
+            <field name="act_window" ref="act_account_statement_line_rule_form"/>
+        </record>
+
+        <menuitem id="menu_account_statement_line_rule"
+            parent="account_bank_statement.menu_bank_statement_configuration" sequence="10"
+            action="act_account_statement_line_rule_form"
+            name="Rules"/>
+        <record model="ir.ui.menu-res.group" id="menu_account_statement_line_rule_group_admin">
+            <field name="menu" ref="menu_account_statement_line_rule"/>
+            <field name="group" ref="account_bank_statement.group_account_bank_statement_admin"/>
+        </record>
+
+        <record model="ir.action.act_window" id="act_account_statement_line_rule_form2">
+            <field name="name">Lines</field>
+            <field name="res_model">account.bank.statement.line.rule.line</field>
+            <field name="domain">[('rule', 'in', Eval('active_ids'))]</field>
+        </record>
+        <record model="ir.action.keyword"
+                id="act_open_account_statement_line_rule_keyword1">
+            <field name="keyword">form_relate</field>
+            <field name="model">account.bank.statement.line.rule,-1</field>
+            <field name="action" ref="act_account_statement_line_rule_form2"/>
+        </record>
+
+        <record model="ir.model.access" id="access_account_statement_line_rule">
+            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.model.access" id="access_account_statement_line_rule_group_admin">
+            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule')]"/>
+            <field name="group" ref="account_bank_statement.group_account_bank_statement_admin"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+
+        <record model="ir.rule.group" id="rule_group_account_statement_line_rule">
+            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule')]"/>
+            <field name="global_p" eval="True"/>
+        </record>
+        <record model="ir.rule" id="rule_account_statement_line_rule1">
+            <field name="domain">[('company', '=', user.company.id if user.company else None)]</field>
+            <field name="rule_group" ref="rule_group_account_statement_line_rule"/>
+        </record>
+
+        <!-- statement line rule line -->
+        <record model="ir.ui.view" id="account_statement_line_rule_line_view_tree">
+            <field name="model">account.bank.statement.line.rule.line</field>
+            <field name="type">tree</field>
+            <field name="name">account_bank_statement_line_rule_line_tree</field>
+        </record>
+        <record model="ir.ui.view" id="account_statement_line_rule_line_view_form">
+            <field name="model">account.bank.statement.line.rule.line</field>
+            <field name="type">form</field>
+            <field name="name">account_bank_statement_line_rule_line_form</field>
+        </record>
+        <record model="ir.action.act_window" id="act_account_statement_line_rule_line_form">
+            <field name="name">Account Statement Line Rule Line</field>
+            <field name="res_model">account.bank.statement.line.rule.line</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_account_statement_line_rule_line_form_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="account_statement_line_rule_line_view_tree"/>
+            <field name="act_window" ref="act_account_statement_line_rule_line_form"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_account_statement_line_rule_line_form_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="account_statement_line_rule_line_view_form"/>
+            <field name="act_window" ref="act_account_statement_line_rule_line_form"/>
+        </record>
+
+        <menuitem id="menu_account_statement_line_rule_line"
+            parent="menu_account_statement_line_rule" sequence="10"
+            action="act_account_statement_line_rule_line_form"
+            name="Rule Lines"/>
+        <record model="ir.ui.menu-res.group" id="menu_account_statement_line_rule_line_group_admin">
+            <field name="menu" ref="menu_account_statement_line_rule_line"/>
+            <field name="group" ref="account_bank_statement.group_account_bank_statement_admin"/>
+        </record>
+
+        <record model="ir.model.access" id="access_account_statement_line_rule_line">
+            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule.line')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.model.access" id="access_account_statement_line_rule_line_group">
+            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule.line')]"/>
+            <field name="group" ref="account_bank_statement.group_account_bank_statement"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+
+        <record model="ir.rule.group" id="rule_group_account_statement_line_rule_line">
+            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule.line')]"/>
+            <field name="global_p" eval="True"/>
+        </record>
+        <record model="ir.rule" id="rule_account_statement_line_rule_line1">
+            <field name="domain">[('company', '=', user.company.id if user.company else None)]</field>
+            <field name="rule_group" ref="rule_group_account_statement_line_rule_line"/>
+        </record>
+    </data>
+</tryton>

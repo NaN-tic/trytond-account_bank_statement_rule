@@ -1,0 +1,169 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:account.bank.statement.line.rule,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:account.bank.statement.line.rule,create_date:"
+msgid "Create Date"
+msgstr "Fecha creación"
+
+msgctxt "field:account.bank.statement.line.rule,create_uid:"
+msgid "Create User"
+msgstr "Usuario creación"
+
+msgctxt "field:account.bank.statement.line.rule,currency:"
+msgid "Currency"
+msgstr "Moneda"
+
+msgctxt "field:account.bank.statement.line.rule,currency_digits:"
+msgid "Currency Digits"
+msgstr "Decimales de la moneda"
+
+msgctxt "field:account.bank.statement.line.rule,description:"
+msgid "Description"
+msgstr "Descripción"
+
+msgctxt "field:account.bank.statement.line.rule,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:account.bank.statement.line.rule,journal:"
+msgid "Journal"
+msgstr "Diario"
+
+msgctxt "field:account.bank.statement.line.rule,lines:"
+msgid "Lines"
+msgstr "Líneas"
+
+msgctxt "field:account.bank.statement.line.rule,maximum_amount:"
+msgid "Maximum Amount"
+msgstr "Importe máximo"
+
+msgctxt "field:account.bank.statement.line.rule,minimum_amount:"
+msgid "Minimum Amount"
+msgstr "Importe mínimo"
+
+msgctxt "field:account.bank.statement.line.rule,name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:account.bank.statement.line.rule,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:account.bank.statement.line.rule,sequence:"
+msgid "Sequence"
+msgstr "Secuencia"
+
+msgctxt "field:account.bank.statement.line.rule,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:account.bank.statement.line.rule,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:account.bank.statement.line.rule.line,account:"
+msgid "Account"
+msgstr "Cuenta"
+
+msgctxt "field:account.bank.statement.line.rule.line,amount:"
+msgid "Amount"
+msgstr "Importe"
+
+msgctxt "field:account.bank.statement.line.rule.line,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:account.bank.statement.line.rule.line,create_date:"
+msgid "Create Date"
+msgstr "Fecha creación"
+
+msgctxt "field:account.bank.statement.line.rule.line,create_uid:"
+msgid "Create User"
+msgstr "Usuario creación"
+
+msgctxt "field:account.bank.statement.line.rule.line,description:"
+msgid "Description"
+msgstr "Descripción"
+
+msgctxt "field:account.bank.statement.line.rule.line,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:account.bank.statement.line.rule.line,party:"
+msgid "Party"
+msgstr "Tercero"
+
+msgctxt "field:account.bank.statement.line.rule.line,party_required:"
+msgid "Party Required"
+msgstr "Tercero requerido"
+
+msgctxt "field:account.bank.statement.line.rule.line,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:account.bank.statement.line.rule.line,rule:"
+msgid "Rule"
+msgstr "Regla"
+
+msgctxt "field:account.bank.statement.line.rule.line,sequence:"
+msgid "Sequence"
+msgstr "Secuencia"
+
+msgctxt "field:account.bank.statement.line.rule.line,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:account.bank.statement.line.rule.line,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "help:account.bank.statement.line.rule.line,amount:"
+msgid ""
+"Numeric value or a Python expression that will be evaluated with:\n"
+"- total_amount: the total amount of the line\n"
+"- pending_amount: the pending amount of all line\n"
+msgstr ""
+"Valor numérico o una expresión Python para evaluar con:\n"
+"- total_amount: el import total de la línea.\n"
+"- pending_amount: el import pendiente de todas las líneas."
+
+msgctxt "model:account.bank.statement.line.rule,name:"
+msgid "Statement Line Rule"
+msgstr "Regla del extracto"
+
+msgctxt "model:account.bank.statement.line.rule.line,name:"
+msgid "Statement Line Rule Line"
+msgstr "Línea regla del extracto"
+
+msgctxt "model:ir.action,name:act_account_statement_line_rule_form"
+msgid "Account Statement Line Rule"
+msgstr "Regla del extracto"
+
+msgctxt "model:ir.action,name:act_account_statement_line_rule_form2"
+msgid "Lines"
+msgstr "Líneas"
+
+msgctxt "model:ir.action,name:act_account_statement_line_rule_line_form"
+msgid "Account Statement Line Rule Line"
+msgstr "Línea regla del extracto"
+
+msgctxt "model:ir.ui.menu,name:menu_account_statement_line_rule"
+msgid "Rules"
+msgstr "Reglas"
+
+msgctxt "model:ir.ui.menu,name:menu_account_statement_line_rule_line"
+msgid "Rule Lines"
+msgstr "Líneas de la regla"
+
+msgctxt "view:account.bank.statement.line.rule.line:"
+msgid "Statement Line Rule Line"
+msgstr "Línea regla del extracto"
+
+msgctxt "view:account.bank.statement.line.rule:"
+msgid "Statement Line Rule"
+msgstr "Regla línea del extracto"

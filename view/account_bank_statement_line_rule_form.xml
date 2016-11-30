@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<form string="Statement Line Rule">
+    <label name="name"/>
+    <field name="name"/>
+    <label name="company"/>
+    <field name="company"/>
+    <label name="currency"/>
+    <field name="currency"/>
+    <label name="sequence"/>
+    <field name="sequence"/>
+    <label name="journal"/>
+    <field name="journal"/>
+    <label name="description"/>
+    <field name="description"/>
+    <label name="minimum_amount"/>
+    <field name="minimum_amount"/>
+    <label name="maximum_amount"/>
+    <field name="maximum_amount"/>
+    <separator name="lines" colspan="6"/>
+    <field name="lines" colspan="6"/>
+</form>

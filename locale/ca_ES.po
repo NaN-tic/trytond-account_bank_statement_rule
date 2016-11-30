@@ -1,0 +1,169 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:account.bank.statement.line.rule,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:account.bank.statement.line.rule,create_date:"
+msgid "Create Date"
+msgstr "Data creació"
+
+msgctxt "field:account.bank.statement.line.rule,create_uid:"
+msgid "Create User"
+msgstr "Usuari creació"
+
+msgctxt "field:account.bank.statement.line.rule,currency:"
+msgid "Currency"
+msgstr "Moneda"
+
+msgctxt "field:account.bank.statement.line.rule,currency_digits:"
+msgid "Currency Digits"
+msgstr "Decimals de moneda"
+
+msgctxt "field:account.bank.statement.line.rule,description:"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "field:account.bank.statement.line.rule,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:account.bank.statement.line.rule,journal:"
+msgid "Journal"
+msgstr "Diari"
+
+msgctxt "field:account.bank.statement.line.rule,lines:"
+msgid "Lines"
+msgstr "Línies"
+
+msgctxt "field:account.bank.statement.line.rule,maximum_amount:"
+msgid "Maximum Amount"
+msgstr "Import màxim"
+
+msgctxt "field:account.bank.statement.line.rule,minimum_amount:"
+msgid "Minimum Amount"
+msgstr "Import mínim"
+
+msgctxt "field:account.bank.statement.line.rule,name:"
+msgid "Name"
+msgstr "Nom"
+
+msgctxt "field:account.bank.statement.line.rule,rec_name:"
+msgid "Name"
+msgstr "Nom"
+
+msgctxt "field:account.bank.statement.line.rule,sequence:"
+msgid "Sequence"
+msgstr "Seqüència"
+
+msgctxt "field:account.bank.statement.line.rule,write_date:"
+msgid "Write Date"
+msgstr "Data modificació"
+
+msgctxt "field:account.bank.statement.line.rule,write_uid:"
+msgid "Write User"
+msgstr "Usuari modificació"
+
+msgctxt "field:account.bank.statement.line.rule.line,account:"
+msgid "Account"
+msgstr "Compte"
+
+msgctxt "field:account.bank.statement.line.rule.line,amount:"
+msgid "Amount"
+msgstr "Import"
+
+msgctxt "field:account.bank.statement.line.rule.line,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:account.bank.statement.line.rule.line,create_date:"
+msgid "Create Date"
+msgstr "Data creació"
+
+msgctxt "field:account.bank.statement.line.rule.line,create_uid:"
+msgid "Create User"
+msgstr "Usuari creació"
+
+msgctxt "field:account.bank.statement.line.rule.line,description:"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "field:account.bank.statement.line.rule.line,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:account.bank.statement.line.rule.line,party:"
+msgid "Party"
+msgstr "Tercer"
+
+msgctxt "field:account.bank.statement.line.rule.line,party_required:"
+msgid "Party Required"
+msgstr "Tercer requerit"
+
+msgctxt "field:account.bank.statement.line.rule.line,rec_name:"
+msgid "Name"
+msgstr "Nom"
+
+msgctxt "field:account.bank.statement.line.rule.line,rule:"
+msgid "Rule"
+msgstr "Regla"
+
+msgctxt "field:account.bank.statement.line.rule.line,sequence:"
+msgid "Sequence"
+msgstr "Seqüència"
+
+msgctxt "field:account.bank.statement.line.rule.line,write_date:"
+msgid "Write Date"
+msgstr "Data modificació"
+
+msgctxt "field:account.bank.statement.line.rule.line,write_uid:"
+msgid "Write User"
+msgstr "Usuari modificació"
+
+msgctxt "help:account.bank.statement.line.rule.line,amount:"
+msgid ""
+"Numeric value or a Python expression that will be evaluated with:\n"
+"- total_amount: the total amount of the line\n"
+"- pending_amount: the pending amount of all line\n"
+msgstr ""
+"Valor numèric o una expressió Python per evaluar amb:\n"
+"- total_amount: l'import total de la línia.\n"
+"- pending_amount: l'import pendent de totes les línies."
+
+msgctxt "model:account.bank.statement.line.rule,name:"
+msgid "Statement Line Rule"
+msgstr "Regla extracte bancari"
+
+msgctxt "model:account.bank.statement.line.rule.line,name:"
+msgid "Statement Line Rule Line"
+msgstr "Línea regla extracte bancari"
+
+msgctxt "model:ir.action,name:act_account_statement_line_rule_form"
+msgid "Account Statement Line Rule"
+msgstr "Regla extracte bancari"
+
+msgctxt "model:ir.action,name:act_account_statement_line_rule_form2"
+msgid "Lines"
+msgstr "Línies"
+
+msgctxt "model:ir.action,name:act_account_statement_line_rule_line_form"
+msgid "Account Statement Line Rule Line"
+msgstr "Línea regla extracte bancari"
+
+msgctxt "model:ir.ui.menu,name:menu_account_statement_line_rule"
+msgid "Rules"
+msgstr "Regles"
+
+msgctxt "model:ir.ui.menu,name:menu_account_statement_line_rule_line"
+msgid "Rule Lines"
+msgstr "Línies de la regla"
+
+msgctxt "view:account.bank.statement.line.rule.line:"
+msgid "Statement Line Rule Line"
+msgstr "Línea regla extracte bancari"
+
+msgctxt "view:account.bank.statement.line.rule:"
+msgid "Statement Line Rule"
+msgstr "Regla extracte bancari"
