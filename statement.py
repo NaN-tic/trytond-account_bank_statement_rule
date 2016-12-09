@@ -15,7 +15,7 @@ __all__ = ['StatementLineRule', 'StatementLine', 'StatementLineRuleLine']
 class StatementLineRule(ModelSQL, ModelView, MatchMixin):
     'Statement Line Rule'
     __name__ = 'account.bank.statement.line.rule'
-    name = fields.Char('Name', required=True)
+    name = fields.Char('Name')
     company = fields.Many2One('company.company', 'Company', required=True,
         domain=[
             ('id', If(Eval('context', {}).contains('company'), '=', '!='),
@@ -34,7 +34,7 @@ class StatementLineRule(ModelSQL, ModelView, MatchMixin):
     maximum_amount = fields.Numeric('Maximum Amount',
         digits=(16, Eval('currency_digits', 2)),
         depends=['currency_digits'])
-    currency = fields.Many2One('currency.currency', 'Currency', required=True)
+    currency = fields.Many2One('currency.currency', 'Currency')
     currency_digits = fields.Function(fields.Integer('Currency Digits'),
         'on_change_with_currency_digits')
     sequence = fields.Integer('Sequence')
@@ -86,7 +86,7 @@ class StatementLineRuleLine(ModelSQL, ModelView):
         select=True)
     rule = fields.Many2One('account.bank.statement.line.rule', 'Rule',
         ondelete='CASCADE', select=True, required=True)
-    amount = fields.Char('Amount',
+    amount = fields.Char('Amount',required=True,
         help=('Numeric value or a Python expression that will be evaluated with:\n'
             '- total_amount: the total amount of the line\n'
             '- pending_amount: the pending amount of all line\n'))
@@ -132,8 +132,6 @@ class StatementLine:
         pattern.setdefault('currency', self.statement_currency.id)
         if self.journal:
             pattern.setdefault('journal', self.journal.id)
-        if self.description:
-            pattern.setdefault('description', self.description)
         return pattern
 
     def get_move_line_from_rline(self, rline, amount):
@@ -148,47 +146,49 @@ class StatementLine:
         mline.description = rline.description
         return mline
 
-    def _search_lines_by_rules(self):
+    @classmethod
+    def search_lines_by_rules(cls, st_lines):
         pool = Pool()
         Rule = pool.get('account.bank.statement.line.rule')
-        MoveLine = pool.get('account.bank.statement.move.line')
-
-        pattern = self._get_rule_pattern()
+        BSMoveLine = pool.get('account.bank.statement.move.line')
 
         to_create = []
-        for rule in Rule.search([]):
-            if rule.match(pattern):
-                if (rule.minimum_amount and not (
-                        rule.minimum_amount < self.amount)):
-                    continue
-                if (rule.maximum_amount and not (
-                        rule.maximum_amount > self.amount)):
-                    continue
+        for line in st_lines:
+            pattern = line._get_rule_pattern()
 
-                # TODO convert amount currency to company_amount currency
+            for rule in Rule.search([]):
+                if rule.match(pattern):
+                    if (rule.minimum_amount and not (
+                            rule.minimum_amount < line.amount)):
+                        continue
+                    if (rule.maximum_amount and not (
+                            rule.maximum_amount > line.amount)):
+                        continue
+                    if (rule.description and not (
+                                rule.description in line.description)):
+                        continue
 
-                context = {}
-                context.setdefault('names', {})['total_amount'] = str(self.amount)
-                context.setdefault('functions', {})['Decimal'] = Decimal
-                pending_amount = self.amount
-                for rline in rule.lines:
-                    context['names']['pending_amount'] = str(pending_amount)
+                    # TODO convert amount currency to company_amount currency
 
-                    amount = rline.amount
-                    if ((rline.amount == 'total_amount') or (
-                            rline.amount == 'pending_amount')):
-                        amount = simple_eval(
-                            decistmt(str(rline.amount)), **context)
+                    context = {}
+                    context.setdefault('names', {})['total_amount'] = str(line.amount)
+                    context.setdefault('functions', {})['Decimal'] = Decimal
+                    pending_amount = line.amount
+                    for rline in rule.lines:
+                        context['names']['pending_amount'] = str(pending_amount)
 
-                    amount = Decimal(amount) if amount else Decimal('0.0')
-                    pending_amount -= amount
-                    mline = self.get_move_line_from_rline(rline, amount)
-                    to_create.append(mline._save_values)
-                break
+                        amount = simple_eval(decistmt(str(rline.amount)),
+                            **context)
+                        amount = Decimal(amount) if amount else Decimal('0.0')
+                        pending_amount -= amount
+                        mline = line.get_move_line_from_rline(rline, amount)
+                        to_create.append(mline._save_values)
+                    break
+
         if to_create:
-            MoveLine.create(to_create)
+            BSMoveLine.create(to_create)
 
-    def _search_reconciliation(self):
-        if not self.lines:
-            self._search_lines_by_rules()
-        super(StatementLine, self)._search_reconciliation()
+    @classmethod
+    def search_reconcile(cls, st_lines):
+        super(StatementLine, cls).search_reconcile(st_lines)
+        cls.search_lines_by_rules(st_lines)

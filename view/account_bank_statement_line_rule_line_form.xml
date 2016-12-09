@@ -4,8 +4,9 @@ this repository contains the full copyright notices and license terms. -->
 <form string="Statement Line Rule Line">
     <label name="rule"/>
     <field name="rule"/>
+    <newline/>
     <label name="amount"/>
-    <field name="amount"/>
+    <field name="amount" colspan="3"/>
     <label name="party"/>
     <field name="party"/>
     <label name="account"/>
