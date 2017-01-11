@@ -159,10 +159,10 @@ class StatementLine:
             for rule in Rule.search([]):
                 if rule.match(pattern):
                     if (rule.minimum_amount and not (
-                            rule.minimum_amount < line.amount)):
+                            rule.minimum_amount <= line.amount)):
                         continue
                     if (rule.maximum_amount and not (
-                            rule.maximum_amount > line.amount)):
+                            rule.maximum_amount >= line.amount)):
                         continue
                     if (rule.description and not (
                                 rule.description in line.description)):
