@@ -106,6 +106,11 @@ class StatementLineRuleLine(ModelSQL, ModelView):
     description = fields.Char('Description')
     sequence = fields.Integer('Sequence')
 
+    @classmethod
+    def __setup__(cls):
+        super(StatementLineRuleLine, cls).__setup__()
+        cls._order.insert(0, ('sequence', 'ASC'))
+
     @staticmethod
     def default_company():
         return Transaction().context.get('company')
