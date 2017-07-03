@@ -106,11 +106,6 @@ class StatementLineRuleLine(ModelSQL, ModelView):
     description = fields.Char('Description')
     sequence = fields.Integer('Sequence')
 
-    @classmethod
-    def __setup__(cls):
-        super(StatementLineRuleLine, cls).__setup__()
-        cls._order.insert(0, ('sequence', 'ASC'))
-
     @staticmethod
     def default_company():
         return Transaction().context.get('company')
@@ -154,6 +149,8 @@ class StatementLine:
 
         to_create = []
         for line in st_lines:
+            if line.reconciled:
+                continue
             pattern = line._get_rule_pattern()
 
             for rule in Rule.search([]):
