@@ -3,7 +3,8 @@
 # the full copyright notices and license terms.
 from decimal import Decimal
 from trytond.pool import Pool, PoolMeta
-from trytond.model import ModelView, ModelSQL, MatchMixin, fields
+from trytond.model import (ModelView, ModelSQL, MatchMixin, sequence_ordered,
+    fields)
 from trytond.transaction import Transaction
 from trytond.pyson import If, Eval, Bool
 from simpleeval import simple_eval
@@ -12,7 +13,7 @@ from trytond.tools import decistmt
 __all__ = ['StatementLineRule', 'StatementLine', 'StatementLineRuleLine']
 
 
-class StatementLineRule(ModelSQL, ModelView, MatchMixin):
+class StatementLineRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
     'Statement Line Rule'
     __name__ = 'account.bank.statement.line.rule'
     name = fields.Char('Name')
@@ -37,14 +38,8 @@ class StatementLineRule(ModelSQL, ModelView, MatchMixin):
     currency = fields.Many2One('currency.currency', 'Currency')
     currency_digits = fields.Function(fields.Integer('Currency Digits'),
         'on_change_with_currency_digits')
-    sequence = fields.Integer('Sequence')
     lines = fields.One2Many('account.bank.statement.line.rule.line',
         'rule', 'Lines')
-
-    @classmethod
-    def __setup__(cls):
-        super(StatementLineRule, cls).__setup__()
-        cls._order.insert(0, ('sequence', 'ASC'))
 
     @staticmethod
     def default_company():
@@ -74,10 +69,9 @@ class StatementLineRule(ModelSQL, ModelView, MatchMixin):
         return 2
 
 
-class StatementLineRuleLine(ModelSQL, ModelView):
+class StatementLineRuleLine(sequence_ordered(), ModelSQL, ModelView):
     'Statement Line Rule Line'
     __name__ = 'account.bank.statement.line.rule.line'
-    _rec_name = 'rule'
     company = fields.Many2One('company.company', 'Company', required=True,
         domain=[
             ('id', If(Eval('context', {}).contains('company'), '=', '!='),
@@ -86,8 +80,9 @@ class StatementLineRuleLine(ModelSQL, ModelView):
         select=True)
     rule = fields.Many2One('account.bank.statement.line.rule', 'Rule',
         ondelete='CASCADE', select=True, required=True)
-    amount = fields.Char('Amount',required=True,
-        help=('Numeric value or a Python expression that will be evaluated with:\n'
+    amount = fields.Char('Amount', required=True,
+        help=('Numeric value or a Python expression '
+            'that will be evaluated with:\n'
             '- total_amount: the total amount of the line\n'
             '- pending_amount: the pending amount of all line\n'))
     account = fields.Many2One('account.account', 'Account', required=True,
@@ -104,7 +99,6 @@ class StatementLineRuleLine(ModelSQL, ModelView):
     party_required = fields.Function(fields.Boolean('Party Required'),
         'on_change_with_party_required')
     description = fields.Char('Description')
-    sequence = fields.Integer('Sequence')
 
     @staticmethod
     def default_company():
@@ -168,11 +162,13 @@ class StatementLine:
                     # TODO convert amount currency to company_amount currency
 
                     context = {}
-                    context.setdefault('names', {})['total_amount'] = str(line.amount)
+                    context.setdefault('names', {})['total_amount'] = (
+                        str(line.amount))
                     context.setdefault('functions', {})['Decimal'] = Decimal
                     pending_amount = line.amount
                     for rline in rule.lines:
-                        context['names']['pending_amount'] = str(pending_amount)
+                        context['names']['pending_amount'] = (
+                            str(pending_amount))
 
                         amount = simple_eval(decistmt(str(rline.amount)),
                             **context)

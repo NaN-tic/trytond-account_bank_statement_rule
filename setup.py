@@ -13,7 +13,11 @@ try:
 except ImportError:
     from ConfigParser import ConfigParser
 
-MODULE2PREFIX = {}
+MODULE = 'account_bank_statement_rule'
+PREFIX = 'nantic'
+MODULE2PREFIX = {
+    'account_bank_statement_account': 'trytonspain',
+    }
 
 
 def read(fname):
@@ -41,8 +45,6 @@ version = info.get('version', '0.0.1')
 major_version, minor_version, _ = version.split('.', 2)
 major_version = int(major_version)
 minor_version = int(minor_version)
-name = 'nantic_account_bank_statement_rule'
-download_url = 'https://bitbucket.org/nantic/trytond-account_bank_statement_rule'
 
 requires = []
 for dep in info.get('depends', []):
@@ -51,28 +53,40 @@ for dep in info.get('depends', []):
         requires.append(get_require_version('%s_%s' % (prefix, dep)))
 requires.append(get_require_version('trytond'))
 
-tests_require = []
-dependency_links = []
+tests_require = [get_require_version('proteus')]
+series = '%s.%s' % (major_version, minor_version)
+if minor_version % 2:
+    branch = 'default'
+else:
+    branch = series
+dependency_links = [
+    ('hg+https://bitbucket.org/trytonspain/'
+        'trytond-account_bank_statement_account@%(branch)s'
+        '#egg=trytonspain-account_bank_statement_account-%(series)s' % {
+            'branch': branch,
+            'series': series,
+            }),
+    ]
 if minor_version % 2:
     # Add development index for testing with proteus
     dependency_links.append('https://trydevpi.tryton.org/')
 
-setup(name=name,
+setup(name='%s_%s' % (PREFIX, MODULE),
     version=version,
     description='Tryton account bank statement rule module',
     long_description=read('README'),
     author='Nan·TIC',
     author_email='info@nan-tic.com',
-    url='https://bitbucket.org/trytonspain/',
-    download_url=download_url,
+    url='https://bitbucket.org/nantic/',
+    download_url='https://bitbucket.org/nantic/trytond-%s' % MODULE,
     keywords='',
-    package_dir={'trytond.modules.account_bank_statement_rule': '.'},
+    package_dir={'trytond.modules.%s' % MODULE: '.'},
     packages=[
-        'trytond.modules.account_bank_statement_rule',
-        'trytond.modules.account_bank_statement_rule.tests',
+        'trytond.modules.%s' % MODULE,
+        'trytond.modules.%s.tests' % MODULE,
         ],
     package_data={
-        'trytond.modules.account_bank_statement_rule': (info.get('xml', [])
+        'trytond.modules.%s' % MODULE: (info.get('xml', [])
             + ['tryton.cfg', 'view/*.xml', 'locale/*.po', '*.odt',
                 'icons/*.svg', 'tests/*.rst']),
         },
@@ -89,9 +103,9 @@ setup(name=name,
         'Natural Language :: Spanish',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Office/Business',
@@ -102,10 +116,13 @@ setup(name=name,
     zip_safe=False,
     entry_points="""
     [trytond.modules]
-    account_bank_statement_rule = trytond.modules.account_bank_statement_rule
-    """,
+    %s = trytond.modules.%s
+    """ % (MODULE, MODULE),
     test_suite='tests',
     test_loader='trytond.test_loader:Loader',
     tests_require=tests_require,
     use_2to3=True,
+    convert_2to3_doctests=[
+        'tests/scenario_bank_statement_rule.rst',
+        ],
     )
