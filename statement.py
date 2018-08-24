@@ -111,8 +111,7 @@ class StatementLineRuleLine(sequence_ordered(), ModelSQL, ModelView):
         return False
 
 
-class StatementLine:
-    __metaclass__ = PoolMeta
+class StatementLine(metaclass=PoolMeta):
     __name__ = 'account.bank.statement.line'
 
     def _get_rule_pattern(self):
