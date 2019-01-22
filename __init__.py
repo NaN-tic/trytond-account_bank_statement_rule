@@ -3,6 +3,7 @@
 # the full copyright notices and license terms.
 from trytond.pool import Pool
 from . import statement
+from . import party
 
 
 def register():
@@ -11,3 +12,6 @@ def register():
         statement.StatementLineRuleLine,
         statement.StatementLine,
         module='account_bank_statement_rule', type_='model')
+    Pool.register(
+        party.PartyReplace,
+        module='account_bank_statement_rule', type_='wizard')
