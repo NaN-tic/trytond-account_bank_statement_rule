@@ -51,6 +51,11 @@ Create party::
     >>> party = Party(name='Party')
     >>> party.save()
 
+Create party2::
+
+    >>> party2 = Party(name='Party')
+    >>> party2.save()
+
 Create Journal::
 
     >>> Sequence = Model.get('ir.sequence')
@@ -96,60 +101,16 @@ Create Rules::
     >>> rline2.sequence = 2
     >>> rule1.save()
 
-    >>> rule2 = Rule()
-    >>> rule2.name = 'Rule 2'
-    >>> rule2.maximum_amount = Decimal('40')
-    >>> rule2.sequence = 2
-    >>> rline3 = RuleLine()
-    >>> rule2.lines.append(rline3)
-    >>> rline3.amount = 'total_amount'
-    >>> rline3.account = revenue
-    >>> rline3.sequence = 1
-    >>> rule2.save()
+Try replace active party::
 
-Create Bank Statement 1 to apply description and minimum amount rules::
+    >>> replace = Wizard('party.replace', models=[party])
+    >>> replace.form.source = party
+    >>> replace.form.destination = party2
+    >>> replace.execute('replace')
 
-    >>> BankStatement = Model.get('account.bank.statement')
-    >>> StatementLine = Model.get('account.bank.statement.line')
+Check fields have been replaced::
 
-    >>> statement = BankStatement(journal=statement_journal, date=now)
-    >>> statement_line = StatementLine()
-    >>> statement.lines.append(statement_line)
-    >>> statement_line.date = now
-    >>> statement_line.description = 'Apply Rule 1'
-    >>> statement_line.amount = Decimal('80.0')
-    >>> statement_line.party = party
-    >>> statement.save()
-    >>> statement.reload()
-
-Apply rules in Bank Statement 1::
-
-    >>> slines = [l for l in statement.lines]
-    >>> StatementLine.search_reconcile([l.id for l in slines], config.context)
-    >>> statement.reload()
-    >>> r1line, r2line = statement.lines[0].lines
-    >>> r1line.amount == Decimal('5')
-    True
-    >>> r2line.amount == Decimal('75')
-    True
-
-Create Bank Statement 2 to apply account and maximum amount rules::
-
-    >>> statement2 = BankStatement(journal=statement_journal, date=now)
-    >>> statement_line2 = StatementLine()
-    >>> statement2.lines.append(statement_line2)
-    >>> statement_line2.date = now
-    >>> statement_line2.description = 'Apply Rule 2'
-    >>> statement_line2.amount = Decimal('30')
-    >>> statement_line2.account = revenue
-    >>> statement2.save()
-    >>> statement2.reload()
-
-Apply rules in Bank Statement 2::
-
-    >>> slines = [l for l in statement2.lines]
-    >>> StatementLine.search_reconcile([l.id for l in slines], config.context)
-    >>> statement2.reload()
-    >>> r1line, = statement2.lines[0].lines
-    >>> r1line.amount == Decimal('30')
+    >>> rule1.reload()
+    >>> line1, line2 = rule1.lines
+    >>> line1.party == party2
     True
