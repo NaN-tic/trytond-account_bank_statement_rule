@@ -65,6 +65,7 @@
         </record>
 
         <record model="ir.rule.group" id="rule_group_account_statement_line_rule">
+            <field name="name">Bank Statement Line Company Rule</field>
             <field name="model" search="[('model', '=', 'account.bank.statement.line.rule')]"/>
             <field name="global_p" eval="True"/>
         </record>
@@ -125,6 +126,7 @@
         </record>
 
         <record model="ir.rule.group" id="rule_group_account_statement_line_rule_line">
+            <field name="name">Bank Statement Line Company Rule Line</field>
             <field name="model" search="[('model', '=', 'account.bank.statement.line.rule.line')]"/>
             <field name="global_p" eval="True"/>
         </record>
