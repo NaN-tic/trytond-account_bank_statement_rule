@@ -88,7 +88,7 @@ class StatementLineRuleLine(sequence_ordered(), ModelSQL, ModelView):
     account = fields.Many2One('account.account', 'Account', required=True,
         domain=[
             ('company', '=', Eval('company', 0)),
-            ('kind', '!=', 'view'),
+            ('type', '!=', None),
             ],
         depends=['company'])
     party = fields.Many2One('party.party', 'Party',
