@@ -115,7 +115,6 @@ Create Bank Statement 1 to apply description and minimum amount rules::
     >>> statement_line.date = now
     >>> statement_line.description = 'Apply Rule 1'
     >>> statement_line.amount = Decimal('80.0')
-    >>> statement_line.party = party
     >>> statement.save()
     >>> statement.reload()
 
