@@ -59,7 +59,9 @@ Create party2::
 Create Journal::
 
     >>> Sequence = Model.get('ir.sequence')
-    >>> sequence = Sequence(name='Bank', code='account.journal',
+    >>> SequenceType = Model.get('ir.sequence.type')
+    >>> sequence_type, = SequenceType.find([('name', '=', 'Account Journal')])
+    >>> sequence = Sequence(name='Bank', sequence_type=sequence_type,
     ...     company=company)
     >>> sequence.save()
     >>> AccountJournal = Model.get('account.journal')
