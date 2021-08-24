@@ -18,10 +18,6 @@ msgctxt "field:account.bank.statement.line.rule,currency:"
 msgid "Currency"
 msgstr "Moneda"
 
-msgctxt "field:account.bank.statement.line.rule,currency_digits:"
-msgid "Currency Digits"
-msgstr "Decimales de la moneda"
-
 msgctxt "field:account.bank.statement.line.rule,description:"
 msgid "Description"
 msgstr "Descripción"

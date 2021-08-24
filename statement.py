@@ -9,6 +9,7 @@ from trytond.transaction import Transaction
 from trytond.pyson import If, Eval, Bool
 from simpleeval import simple_eval
 from trytond.tools import decistmt
+from trytond.modules.currency.fields import Monetary
 
 __all__ = ['StatementLineRule', 'StatementLine', 'StatementLineRuleLine']
 
@@ -29,15 +30,11 @@ class StatementLineRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
             ],
         depends=['company'])
     description = fields.Char('Description')
-    minimum_amount = fields.Numeric('Minimum Amount',
-        digits=(16, Eval('currency_digits', 2)),
-        depends=['currency_digits'])
-    maximum_amount = fields.Numeric('Maximum Amount',
-        digits=(16, Eval('currency_digits', 2)),
-        depends=['currency_digits'])
-    currency = fields.Many2One('currency.currency', 'Currency')
-    currency_digits = fields.Function(fields.Integer('Currency Digits'),
-        'on_change_with_currency_digits')
+    minimum_amount = Monetary('Minimum Amount',
+        digits='currency', currency='currency')
+    maximum_amount = Monetary('Maximum Amount',
+        digits='currency', currency='currency')
+    currency = fields.Many2One('currency.currency', 'Currency', required=True)
     lines = fields.One2Many('account.bank.statement.line.rule.line',
         'rule', 'Lines')
 
@@ -52,21 +49,6 @@ class StatementLineRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
         company = Transaction().context.get('company')
         if company:
             return Company(company).currency.id
-
-    @staticmethod
-    def default_currency_digits():
-        Company = Pool().get('company.company')
-
-        company = Transaction().context.get('company')
-        if company:
-            return Company(company).currency.digits
-        return 2
-
-    @fields.depends('currency')
-    def on_change_with_currency_digits(self, name=None):
-        if self.currency:
-            return self.currency.digits
-        return 2
 
 
 class StatementLineRuleLine(sequence_ordered(), ModelSQL, ModelView):
