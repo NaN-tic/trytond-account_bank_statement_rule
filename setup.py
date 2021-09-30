@@ -15,7 +15,6 @@ PREFIX = 'nantic'
 MODULE2PREFIX = {
     'account_bank_statement': 'trytonspain',
     'account_bank_statement_account': 'trytonspain',
-    'account_move_draft': 'trytonspain',
     }
 
 
@@ -69,12 +68,6 @@ dependency_links = [
     ('git+https://github.com/trytonspain/'
         'trytond-account_bank_statement_account@%(branch)s'
         '#egg=trytonspain-account_bank_statement_account-%(series)s' % {
-            'branch': branch,
-            'series': series,
-            }),
-    ('git+https://github.com/trytonspain/'
-        'trytond-account_move_draft@%(branch)s'
-        '#egg=trytonspain-account_move_draft-%(series)s' % {
             'branch': branch,
             'series': series,
             }),
