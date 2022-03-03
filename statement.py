@@ -130,10 +130,10 @@ class StatementLine(metaclass=PoolMeta):
 
             for rule in Rule.search([]):
                 if rule.match(pattern):
-                    if (rule.minimum_amount and not (
+                    if (rule.minimum_amount is not None and not (
                             rule.minimum_amount <= line.amount)):
                         continue
-                    if (rule.maximum_amount and not (
+                    if (rule.maximum_amount is not None and not (
                             rule.maximum_amount >= line.amount)):
                         continue
                     if (rule.description and not (
