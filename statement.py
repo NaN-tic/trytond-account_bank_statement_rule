@@ -22,8 +22,7 @@ class StatementLineRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
         domain=[
             ('id', If(Eval('context', {}).contains('company'), '=', '!='),
                 Eval('context', {}).get('company', -1)),
-            ],
-        select=True)
+            ])
     journal = fields.Many2One('account.bank.statement.journal', 'Journal',
         domain=[
             ('company', '=', Eval('company', -1)),
@@ -58,10 +57,9 @@ class StatementLineRuleLine(sequence_ordered(), ModelSQL, ModelView):
         domain=[
             ('id', If(Eval('context', {}).contains('company'), '=', '!='),
                 Eval('context', {}).get('company', -1)),
-            ],
-        select=True)
+            ])
     rule = fields.Many2One('account.bank.statement.line.rule', 'Rule',
-        ondelete='CASCADE', select=True, required=True)
+        ondelete='CASCADE', required=True)
     amount = fields.Char('Amount', required=True,
         help=('Numeric value or a Python expression '
             'that will be evaluated with:\n'
