@@ -78,7 +78,7 @@ class StatementLineRuleLine(sequence_ordered(), ModelSQL, ModelView):
             'required': Bool(Eval('party_required')),
             },
         context={
-            'company': Eval('company'),
+            'company': Eval('company', -1),
             },
         depends=['company'])
     party_required = fields.Function(fields.Boolean('Party Required'),
