@@ -26,8 +26,7 @@ class StatementLineRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
     journal = fields.Many2One('account.bank.statement.journal', 'Journal',
         domain=[
             ('company', '=', Eval('company', -1)),
-            ],
-        depends=['company'])
+            ])
     description = fields.Char('Description')
     minimum_amount = Monetary('Minimum Amount',
         digits='currency', currency='currency')
@@ -69,8 +68,7 @@ class StatementLineRuleLine(sequence_ordered(), ModelSQL, ModelView):
         domain=[
             ('company', '=', Eval('company', 0)),
             ('type', '!=', None),
-            ],
-        depends=['company'])
+            ])
     party = fields.Many2One('party.party', 'Party',
         states={
             'required': Bool(Eval('party_required')),
