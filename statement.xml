@@ -49,14 +49,14 @@
         </record>
 
         <record model="ir.model.access" id="access_account_statement_line_rule">
-            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule')]"/>
+            <field name="model">account.bank.statement.line.rule</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_delete" eval="False"/>
         </record>
         <record model="ir.model.access" id="access_account_statement_line_rule_group_admin">
-            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule')]"/>
+            <field name="model">account.bank.statement.line.rule</field>
             <field name="group" ref="account_bank_statement.group_account_bank_statement_admin"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -66,7 +66,7 @@
 
         <record model="ir.rule.group" id="rule_group_account_statement_line_rule">
             <field name="name">Bank Statement Line Company Rule</field>
-            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule')]"/>
+            <field name="model">account.bank.statement.line.rule</field>
             <field name="global_p" eval="True"/>
         </record>
         <record model="ir.rule" id="rule_account_statement_line_rule1">
@@ -112,14 +112,14 @@
         </record>
 
         <record model="ir.model.access" id="access_account_statement_line_rule_line">
-            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule.line')]"/>
+            <field name="model">account.bank.statement.line.rule.line</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_delete" eval="False"/>
         </record>
         <record model="ir.model.access" id="access_account_statement_line_rule_line_group">
-            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule.line')]"/>
+            <field name="model">account.bank.statement.line.rule.line</field>
             <field name="group" ref="account_bank_statement.group_account_bank_statement"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -129,7 +129,7 @@
 
         <record model="ir.rule.group" id="rule_group_account_statement_line_rule_line">
             <field name="name">Bank Statement Line Company Rule Line</field>
-            <field name="model" search="[('model', '=', 'account.bank.statement.line.rule.line')]"/>
+            <field name="model">account.bank.statement.line.rule.line</field>
             <field name="global_p" eval="True"/>
         </record>
         <record model="ir.rule" id="rule_account_statement_line_rule_line1">
