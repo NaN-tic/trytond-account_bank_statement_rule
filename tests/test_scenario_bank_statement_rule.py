@@ -1,8 +1,3 @@
-# ====================================
-# Account Bank Statement Rule Scenario
-# ====================================
-
-# Imports
 from trytond.modules.account_invoice.tests.tools import set_fiscalyear_invoice_sequences
 from trytond.modules.account.tests.tools import create_fiscalyear, create_chart, get_accounts
 from trytond.modules.company.tests.tools import create_company, get_company
@@ -24,7 +19,6 @@ class Test(unittest.TestCase):
 
     def test(self):
 
-        today = datetime.date.today()
         now = datetime.datetime.now()
 
         # Install account_bank_statement_rule
