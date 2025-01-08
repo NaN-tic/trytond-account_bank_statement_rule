@@ -155,7 +155,7 @@ class StatementLine(metaclass=PoolMeta):
                         amount = Decimal(amount) if amount else Decimal(0)
                         pending_amount -= amount
                         mline = line.get_move_line_from_rline(rline, amount)
-                        to_create.append(mline._save_values)
+                        to_create.append(mline._save_values())
                     break
 
         if to_create:
