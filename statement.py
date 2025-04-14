@@ -44,9 +44,9 @@ class StatementLineRule(sequence_ordered(), ModelSQL, ModelView, MatchMixin):
     def default_currency():
         Company = Pool().get('company.company')
 
-        company = Transaction().context.get('company')
-        if company:
-            return Company(company).currency.id
+        company_id = Transaction().context.get('company')
+        if company_id is not None and company_id >= 0:
+            return Company(company_id).currency.id
 
 
 class StatementLineRuleLine(sequence_ordered(), ModelSQL, ModelView):
