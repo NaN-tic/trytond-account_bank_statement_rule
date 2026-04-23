@@ -102,6 +102,7 @@ class Test(unittest.TestCase):
         statement_line.description = 'Apply Rule 1'
         statement_line.amount = Decimal('80.0')
         statement.save()
+        statement.click('confirm')
         statement.reload()
 
         # Apply rules in Bank Statement 1
@@ -121,6 +122,7 @@ class Test(unittest.TestCase):
         statement_line2.amount = Decimal('30')
         statement_line2.account = revenue
         statement2.save()
+        statement2.click('confirm')
         statement2.reload()
 
         # Apply rules in Bank Statement 2
