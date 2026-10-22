@@ -162,6 +162,7 @@ class StatementLine(metaclass=PoolMeta):
             BSMoveLine.create(to_create)
 
     @classmethod
+    @ModelView.button
     def search_reconcile(cls, st_lines):
         super(StatementLine, cls).search_reconcile(st_lines)
         cls.search_lines_by_rules(st_lines)
